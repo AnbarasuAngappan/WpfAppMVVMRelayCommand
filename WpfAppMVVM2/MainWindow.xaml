@@ -5,34 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfAppMVVM2"                 
         mc:Ignorable="d"
-        Title="MainWindow" Height="421.5" Width="507.5">
-    <Window.Resources>
-        <!--<local:ViewModel x:Key="DatetimeToDateConverter"></local:ViewModel>-->
-         
+        Title="MainWindow" Height="421.5" Width="507.5" WindowStartupLocation="CenterScreen">
+    <Window.Resources>        
+        <local:DatetimeToDateConverter x:Key="Myconvert"></local:DatetimeToDateConverter>
+        <local:ViewModel x:Key="DataContext"></local:ViewModel>
     </Window.Resources>
-    <Grid Margin="25">
+    <Grid Margin="25" DataContext="{Binding Source={StaticResource DataContext}}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>           
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="220"/>
             <ColumnDefinition Width="220"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="Name" HorizontalAlignment="Center"/>
-        <TextBox Grid.Row="0" Grid.Column="1" Width="100" HorizontalAlignment="Center" Text="{Binding Student.Name, Mode=TwoWay}"/>
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Age" HorizontalAlignment="Center"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Width="100" HorizontalAlignment="Center" Text="{Binding Student.Age, Mode=TwoWay}"/>
-        <Button Content="Submit" Command="{Binding SubmitCommand}" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="0"/>
-        <ListView ItemsSource="{Binding Students}" Grid.Row="3" Grid.Column="1" Width="200">
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Name :   " HorizontalAlignment="Right"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Width="100" HorizontalAlignment="Left" Text="{Binding Student.Name, Mode=TwoWay}"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Age :   " HorizontalAlignment="Right"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Width="100" HorizontalAlignment="Left" Text="{Binding Student.Age, Mode=TwoWay}"/>
+        <Button Content="Submit" Command="{Binding SubmitCommand}" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="1"/>
+        <ListView ItemsSource="{Binding Students}" Grid.Row="3" Grid.Column="0" Width="200">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="60"/>
                     <GridViewColumn  Header="Age" DisplayMemberBinding="{Binding Age}" Width="60"/>
-                    <GridViewColumn  Header="Joining Date" DisplayMemberBinding="{Binding JoiningDate}" Width="80" />
+                    <GridViewColumn  Header="Joining Date" DisplayMemberBinding="{Binding JoiningDate,Converter={StaticResource Myconvert}}" Width="80" />
                 </GridView>
             </ListView.View>
         </ListView>

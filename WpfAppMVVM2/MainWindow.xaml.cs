@@ -22,9 +22,7 @@ namespace WpfAppMVVM2
     {
         public MainWindow()
         {
-            InitializeComponent();
-            ViewModel viewModel = new ViewModel();
-            this.DataContext = viewModel;
+            InitializeComponent();        
            
         }
     }

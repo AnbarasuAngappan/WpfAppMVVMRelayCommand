@@ -11,7 +11,9 @@ namespace WpfAppMVVM2
     class ViewModel : ViewModelBase
     {
         private Student _student;
+
         private ObservableCollection<Student> _students;
+
         private ICommand _SubmitCommand;
 
         public ViewModel()
